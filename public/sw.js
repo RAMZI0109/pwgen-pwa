@@ -18,7 +18,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting()
 })
 
-// Activate: clean up old caches
+// Activate: clean up old caches and notify clients
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
@@ -27,10 +27,16 @@ self.addEventListener('activate', (event) => {
           .filter((key) => key !== CACHE_NAME)
           .map((key) => caches.delete(key))
       )
-    )
+    ).then(() => {
+      // Take control of all open tabs immediately
+      return self.clients.claim()
+    }).then(() => {
+      // Notify all clients that a new version is active
+      return self.clients.matchAll().then((clients) => {
+        clients.forEach((client) => client.postMessage({ type: 'SW_UPDATED' }))
+      })
+    })
   )
-  // Take control of all open tabs immediately
-  self.clients.claim()
 })
 
 // Fetch: cache-first for same-origin, network-only for external

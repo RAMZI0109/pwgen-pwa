@@ -61,6 +61,34 @@ function showToast(message: string) {
   setTimeout(() => toast.remove(), 2500)
 }
 
+// Update banner shown when a new service worker version is available
+function showUpdateBanner() {
+  // Don't show multiple banners
+  if (document.getElementById('update-banner')) return
+
+  const banner = document.createElement('div')
+  banner.id = 'update-banner'
+  banner.className = 'update-banner'
+  banner.innerHTML = `
+    <span>A new version is available.</span>
+    <button id="update-reload-btn" class="update-reload-btn">Reload</button>
+    <button id="update-dismiss-btn" class="update-dismiss-btn" aria-label="Dismiss">&times;</button>
+  `
+  document.body.appendChild(banner)
+
+  // Trigger enter animation
+  requestAnimationFrame(() => banner.classList.add('update-banner-visible'))
+
+  banner.querySelector('#update-reload-btn')!.addEventListener('click', () => {
+    window.location.reload()
+  })
+
+  banner.querySelector('#update-dismiss-btn')!.addEventListener('click', () => {
+    banner.classList.remove('update-banner-visible')
+    banner.addEventListener('transitionend', () => banner.remove())
+  })
+}
+
 // Theme management
 function applyTheme(themeSetting: 'light' | 'dark' | 'auto') {
   const html = document.documentElement
@@ -778,18 +806,28 @@ async function init() {
   // Register service worker for PWA offline support
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').then((reg) => {
+      // Check for updates periodically (every 60 seconds)
+      setInterval(() => reg.update(), 60 * 1000)
+
       reg.addEventListener('updatefound', () => {
         const newWorker = reg.installing
         if (newWorker) {
           newWorker.addEventListener('statechange', () => {
-            if (newWorker.state === 'activated') {
-              showToast('App updated — refresh for the latest version')
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              showUpdateBanner()
             }
           })
         }
       })
     }).catch((err) => {
       console.error('Service worker registration failed:', err)
+    })
+
+    // Listen for SW_UPDATED message from the new service worker
+    navigator.serviceWorker.addEventListener('message', (event) => {
+      if (event.data?.type === 'SW_UPDATED') {
+        showUpdateBanner()
+      }
     })
   }
 
